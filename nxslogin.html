@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NEXUS-Login</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Orbitron',sans-serif;
+    }
+
+    body{
+      height:100vh;
+      overflow:hidden;
+      background:#03010a;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      position:relative;
+    }
+
+    /* Animated background */
+    body::before{
+      content:"";
+      position:absolute;
+      width:100%;
+      height:100%;
+      background:
+      radial-gradient(circle at left bottom, #ff003c, transparent 30%),
+      radial-gradient(circle at right bottom, rgba(132,0,255,.4), transparent 35%),
+      radial-gradient(circle at center, rgba(255,0,180,.15), transparent 40%);
+      filter:blur(40px);
+      animation:bgMove 10s infinite alternate ease-in-out;
+    }
+
+    @keyframes bgMove{
+      0%{
+        transform:scale(1) translateY(0px);
+      }
+      100%{
+        transform:scale(1.1) translateY(-20px);
+      }
+    }
+
+    /* Stars */
+    .stars{
+      position:absolute;
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      z-index:0;
+    }
+
+    .stars span{
+      position:absolute;
+      width:2px;
+      height:2px;
+      background:white;
+      border-radius:50%;
+      animation:twinkle linear infinite;
+    }
+
+    @keyframes twinkle{
+      from{
+        opacity:.2;
+        transform:translateY(0px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(-10px);
+      }
+    }
+
+    /* Main Glass Card */
+    .container{
+      position:relative;
+      width:850px;
+      max-width:95%;
+      height:500px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.15);
+      backdrop-filter:blur(15px);
+      border-radius:20px;
+      box-shadow:
+      0 0 20px #ff003c,
+      inset 0 0 20px rgba(255,255,255,.05);
+      z-index:5;
+      overflow:hidden;
+      animation:float 5s infinite ease-in-out;
+    }
+
+    @keyframes float{
+      0%,100%{
+        transform:translateY(0px);
+      }
+      50%{
+        transform:translateY(-10px);
+      }
+    }
+
+    /* Neon border effects */
+    .container::before{
+      content:"";
+      position:absolute;
+      top:25px;
+      left:-20px;
+      width:180px;
+      height:6px;
+      background: #ff003c;
+      border-radius:10px;
+      box-shadow:0 0 20px  #ff003c;
+    }
+
+    .container::after{
+      content:"";
+      position:absolute;
+      right:-4px;
+      top:160px;
+      width:6px;
+      height:120px;
+      background: #ff003c;
+      border-radius:10px;
+      box-shadow:0 0 20px  #ff003c;
+    }
+
+    .login-box{
+      position:absolute;
+      width:100%;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      padding:40px;
+      z-index:2;
+    }
+
+    .title{
+      color: #ff003c;
+      font-size:42px;
+      margin-bottom:40px;
+      text-shadow:
+      0 0 10px  #ff003c,
+      0 0 20px  #ff003c;
+      animation:glow 2s infinite alternate;
+    }
+
+    @keyframes glow{
+      from{
+        text-shadow:0 0 10px  #ff003c;
+      }
+      to{
+        text-shadow:
+        0 0 20px  #ff003c,
+        0 0 40px  #ff003c;
+      }
+    }
+
+    .input-box{
+      width:500px;
+      max-width:100%;
+      margin-bottom:25px;
+      position:relative;
+    }
+
+    .input-box input{
+      width:100%;
+      padding:18px 60px;
+      border:none;
+      outline:none;
+      border-radius:50px;
+      background:rgba(255,255,255,0.04);
+      color:white;
+      font-size:18px;
+      border:2px solid  #ff003c;
+      box-shadow:
+      0 0 15px #ff003c,
+      inset 0 0 10px rgba(255,255,255,.05);
+      transition:.4s;
+    }
+
+    .input-box input:focus{
+      transform:scale(1.03);
+      box-shadow:
+      0 0 25px  #ff003c,
+      inset 0 0 15px rgba(255,255,255,.1);
+    }
+
+    .input-box i{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      color: #ff003c;
+      font-size:20px;
+    }
+
+    .input-box .left-icon{
+      left:22px;
+    }
+
+    .input-box .toggle{
+      right:22px;
+      cursor:pointer;
+    }
+
+    .options{
+      width:500px;
+      max-width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:25px;
+      color:white;
+      font-size:14px;
+    }
+
+    .remember{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .switch{
+      width:45px;
+      height:22px;
+      background:#444;
+      border-radius:20px;
+      position:relative;
+      cursor:pointer;
+      transition:.3s;
+    }
+
+    .switch::before{
+      content:"";
+      position:absolute;
+      width:18px;
+      height:18px;
+      background:white;
+      border-radius:50%;
+      top:2px;
+      left:2px;
+      transition:.3s;
+    }
+
+    .switch.active{
+      background: #ff003c;
+      box-shadow:0 0 15px  #ff003c;
+    }
+
+    .switch.active::before{
+      left:24px;
+    }
+
+    .forgot{
+      color: rgba(255,0,80,.35);
+      cursor:pointer;
+      transition:.3s;
+    }
+
+    .forgot:hover{
+      text-shadow:0 0 10px  #ff003c;
+    }
+
+    .btn{
+      width:300px;
+      padding:21px;
+      border:none;
+      border-radius:50px;
+      font-size:22px;
+      background:transparent;
+      color:white;
+      border:2px solid  #ff003c;
+      cursor:pointer;
+      transition:.4s;
+      box-shadow:0 0 15px #ff003c;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .btn::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:-100%;
+      width:100%;
+      height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
+      transition:.5s;
+    }
+
+    .btn:hover::before{
+      left:100%;
+    }
+
+    .btn:hover{
+      background: #ff003c;
+      box-shadow:
+      0 0 20px  #ff003c,
+      0 0 40px  #ff003c;
+      transform:scale(1.05);
+    }
+
+    .social-text{
+      margin-top:25px;
+      color:#ddd;
+      position:relative;
+      display:flex;
+      align-items:center;
+      gap:15px;
+    }
+
+    .social-text::before,
+    .social-text::after{
+      content:"";
+      width:80px;
+      height:2px;
+      background: #ff003c;
+      box-shadow:0 0 10px  #ff003c;
+    }
+
+    .social-icons{
+      display:flex;
+      gap:25px;
+      margin-top:25px;
+    }
+
+    .icon{
+      width:60px;
+      height:60px;
+      border-radius:50%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      border:2px solid  #ff003c;
+      color:white;
+      font-size:26px;
+      cursor:pointer;
+      transition:.4s;
+      position:relative;
+      overflow:hidden;
+      box-shadow:0 0 15px #ff003c;
+    }
+
+    .icon:hover{
+      transform:translateY(-10px) scale(1.1) rotate(10deg);
+      background: #ff003c;
+      box-shadow:
+      0 0 20px  #ff003c,
+      0 0 50px  #ff003c;
+    }
+
+    /* Pulse animation */
+    .pulse{
+      animation:pulse 2s infinite;
+    }
+
+    @keyframes pulse{
+      0%{
+        box-shadow:0 0 10px  #ff003c;
+      }
+      50%{
+        box-shadow:0 0 30px  #ff003c;
+      }
+      100%{
+        box-shadow:0 0 10px  #ff003c;
+      }
+    }
+
+    /* Responsive */
+    @media(max-width:700px){
+
+      .title{
+        font-size:30px;
+      }
+
+      .input-box input{
+        padding:15px 50px;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .options{
+        flex-direction:column;
+        gap:15px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Stars -->
+  <div class="stars"></div>
+
+  <!-- Main Container -->
+  <div class="container">
+
+    <div class="login-box">
+
+      <h1 class="title">NEXUS Login</h1>
+
+      <!-- Username -->
+      <div class="input-box">
+        <i class="fa-regular fa-user left-icon"></i>
+        <input type="text" placeholder="Username">
+      </div>
+
+      <!-- Password -->
+      <div class="input-box">
+        <i class="fa-solid fa-lock left-icon"></i>
+        <input type="password" id="password" placeholder="Password">
+        <i class="fa-regular fa-eye toggle" id="togglePassword"></i>
+      </div>
+
+      <!-- Options -->
+      <div class="options">
+
+        <div class="remember">
+          <span>Remember Me</span>
+          <div class="switch" id="switch"></div>
+        </div>
+
+        <div class="forgot">
+          Forgot Password?
+        </div>
+
+      </div>
+
+      <!-- Button -->
+      <button class="btn pulse"><a href="nxs/oficial.html">Login</a></button>
+
+      <!-- Social -->
+      <div class="social-text">
+        or login with
+      </div>
+
+      <div class="social-icons">
+
+        <div class="icon">
+          <i class="fa-brands fa-google"></i>
+        </div>
+
+        <div class="icon">
+          <i class="fa-brands fa-github"></i>
+        </div>
+
+        <div class="icon">
+          <i class="fa-brands fa-twitter"></i>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    // Password Toggle
+    const toggle = document.getElementById("togglePassword");
+    const password = document.getElementById("password");
+
+    toggle.addEventListener("click", () => {
+
+      const type =
+      password.getAttribute("type") === "password"
+      ? "text"
+      : "password";
+
+      password.setAttribute("type", type);
+
+      toggle.classList.toggle("fa-eye");
+      toggle.classList.toggle("fa-eye-slash");
+
+    });
+
+    // Remember switch
+    const switchBtn = document.getElementById("switch");
+
+    switchBtn.addEventListener("click", () => {
+      switchBtn.classList.toggle("active");
+    });
+
+    // Generate stars dynamically
+    const stars = document.querySelector(".stars");
+
+    for(let i = 0; i < 250; i++){
+
+      let star = document.createElement("span");
+
+      let size = Math.random() * 3;
+
+      star.style.width = size + "px";
+      star.style.height = size + "px";
+
+      star.style.left = Math.random() * window.innerWidth + "px";
+      star.style.top = Math.random() * window.innerHeight + "px";
+
+      star.style.animationDuration =
+      (Math.random() * 3 + 2) + "s";
+
+      star.style.opacity = Math.random();
+
+      stars.appendChild(star);
+    }
+
+    // Mouse glow effect
+    document.addEventListener("mousemove",(e)=>{
+
+      const glow = document.createElement("div");
+
+      glow.style.position = "fixed";
+      glow.style.left = e.clientX + "px";
+      glow.style.top = e.clientY + "px";
+      glow.style.width = "10px";
+      glow.style.height = "10px";
+      glow.style.borderRadius = "50%";
+      glow.style.background = "#ff003c";
+      glow.style.pointerEvents = "none";
+      glow.style.boxShadow = "0 0 20px  #ff003c";
+      glow.style.zIndex = "999";
+      glow.style.opacity = ".8";
+
+      document.body.appendChild(glow);
+
+      setTimeout(()=>{
+        glow.remove();
+      },300);
+
+    });
+
+    // Login animation
+    const btn = document.querySelector(".btn");
+
+    btn.addEventListener("click",()=>{
+
+      btn.innerHTML = "Checking...";
+
+      btn.style.letterSpacing = "3px";
+
+      setTimeout(()=>{
+
+        btn.innerHTML = "Welcome//";
+
+        btn.style.background = "#6600ff";
+        btn.style.borderColor = "#6600ff";
+        btn.style.boxShadow = "0 0 30px #6600ff";
+
+      },2000);
+
+    });
+
+  </script>
+
+</body>
+</html>

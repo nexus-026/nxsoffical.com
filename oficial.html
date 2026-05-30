@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS Ultimate</title>
+<link rel="stylesheet" href="official.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="official.js" defer></script>
+<script src="nxsai.js" defer></script>
+</head>
+<body>
+
+<div class="loader" id="loader">
+<h1>NEXUS</h1>
+<div class="loader-bar">
+<div class="loader-fill"></div>
+</div>
+</div>
+
+<div class="cursor"></div>
+<div class="cursor2"></div>
+<div class="grid"></div>
+<div class="neon-bg"></div>
+<canvas id="canvas"></canvas>
+
+<nav>
+<div class="logo">NEXUS</div>
+
+<div class="nav-links">
+<button class="nav-btn active" data-page="home"><i class="fa-solid fa-house"></i> Home</button>
+<button class="nav-btn" data-page="about"><i class="fa-solid fa-user"></i> About</button>
+<button class="nav-btn" data-page="music"><i class="fa-solid fa-music"></i> Music</button>
+<button class="nav-btn" data-page="ai"><i class="fa-solid fa-robot"></i> AI</button>
+<button class="nav-btn" data-page="gallery"><i class="fa-solid fa-image"></i> Gallery</button>
+<button class="nav-btn" data-page="video"><i class="fa-solid fa-video"></i> Videos</button>
+<button class="nav-btn" data-page="setting"><a href="settings/settings.html"><i class="fa-solid fa-gear"></i>Settings</a></button>
+<button class="nav-btn" data-page="login"><a href="log/nxslogin.html"><i class="fa-solid fa-key"></i>Login</a></button>
+</div>
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="Search activities...">
+<i class="fa-solid fa-magnifying-glass"></i>
+</div>
+</nav>
+
+<div class="sidebar">
+<div class="side-icon nav-btn" data-page="home"><i class="fa-solid fa-house"></i></div>
+<div class="side-icon nav-btn" data-page="music"><i class="fa-solid fa-music"></i></div>
+<div class="side-icon nav-btn" data-page="ai"><i class="fa-solid fa-robot"></i></div>
+<div class="side-icon nav-btn" data-page="video"><i class="fa-solid fa-video"></i></div>
+<div class="side-icon nav-btn" data-page="iot"><i class="fa-solid fa-microchip"></i></div>
+<div class="side-icon nav-btn" data-page="login"><i class="fa-solid fa-key"></i></div>
+<div class="side-icon nav-btn" data-page="setting"><a href="settings/settings.html"><i class="fa-solid fa-gear"></i></a></div>
+</div>
+<section class="hero">
+<div>
+<h1>WELCOME TO <span>NEXUS</span></h1>
+<p>
+Official futuristic platform representing AI systems,
+IoT robotics, music production, coding innovations,
+content creation and futuristic technologies.
+</p>
+
+<div class="hero-buttons">
+<button class="primary">Explore Now</button>
+<button class="secondary">View Projects</button>
+</div>
+</div>
+
+<div>
+<div class="orb"></div>
+</div>
+</section>
+<section id="dynamicContent" class="dynamic-content">
+</section>
+<section class="dashboard">
+<h1 class="section-title">JOIN US</h1>
+
+<div class="cards" id="cardsContainer">
+
+<div class="card">
+<i class="fa-solid fa-music"></i>
+<h2>Music Studio</h2>
+<p>Advanced futuristic beats and Nexus sound production.</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-robot"></i>
+<h2>AI Development</h2>
+<p>Artificial intelligence systems and machine learning.</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-microchip"></i>
+<h2>IoT Robotics</h2>
+<p>Arduino, sensors and robotics automation systems.</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-video"></i>
+<h2>Content Creation</h2>
+<p>Futuristic videos, media branding and editing.</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-car-side"></i>
+<h2>Nexus Vehicles</h2>
+<p>Luxury futuristic vehicles and concept systems.</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-globe"></i>
+<h2>Technology</h2>
+<p>Modern web technologies and futuristic interfaces.</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-file"></i>
+<h2>Cloud Storage</h2>
+<p>Keep your files safe and active.</p>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-scew-driver"></i>
+<h2>Tools</h2>
+<p>Here are developing tools.</p>
+</div>
+
+
+</div>
+
+<div class="stats">
+<div class="stat-box">
+<h1 id="count1">0</h1>
+<p>Projects</p>
+</div>
+
+<div class="stat-box">
+<h1 id="count2">0</h1>
+<p>Followers</p>
+</div>
+
+<div class="stat-box">
+<h1 id="count3">0</h1>
+<p>AI Systems</p>
+</div>
+
+<div class="stat-box">
+<h1 id="count4">0</h1>
+<p>Innovations</p>
+</div>
+</div>
+
+<div class="music-player">
+<h2>Futuristic Music System</h2>
+
+<div class="player-controls">
+<button><i class="fa-solid fa-backward"></i></button>
+<button><i class="fa-solid fa-play"></i></button>
+<button><i class="fa-solid fa-forward"></i></button>
+</div>
+
+<div class="visualizer">
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+</div>
+</div>
+
+<div class="gallery">
+<div class="gallery-item">
+<img src="nss1.png" alt="">
+<div class="overlay"><h2>AI Interface</h2></div>
+</div>
+
+<div class="gallery-item">
+<img src="nss1.png" alt="">
+<div class="overlay"><h2>Robotics</h2></div>
+</div>
+
+<div class="gallery-item">
+<img src="pic2.png" alt="">
+<div class="overlay"><h2>Cloud Storage</h2></div>
+</div>
+</div>
+
+</section>
+
+<footer>
+<div class="footer-grid">
+<div class="footer-box">
+<h3>NEXUS</h3>
+<p>Official futuristic digital ecosystem for innovation.</p>
+<div class="socials">
+<i class="fab fa-instagram"></i>
+<i class="fab fa-youtube"></i>
+<i class="fab fa-github"></i>
+<i class="fab fa-tiktok"></i>
+</div>
+</div>
+
+<div class="footer-box">
+<h3>Quick Links</h3>
+<li>Home</li>
+<li>Projects</li>
+<li>AI Systems</li>
+<li>Music</li>
+<li>Gallery</li>
+</div>
+
+<div class="footer-box">
+<h3>Technologies</h3>
+<li>HTML5</li>
+<li>CSS3</li>
+<li>JavaScript</li>
+<li>Animations</li>
+<li>AI Interfaces</li>
+</div>
+</div>
+</footer>
+
+<div class="chat-box">
+<div class="chat-header">
+<i class="fa-solid fa-robot"></i>
+<h3>Nexus AI</h3>
+</div>
+      <div class="chat-window" id="chatWindow"></div>
+      <div class="chat-input">
+          <input type="text" id="userInput"  placeholder="Talk to Nexus AI...">
+          <button onclick="sendMessage()">Send</button>
+      </div>
+
+</div>
+</body>
+</html>
